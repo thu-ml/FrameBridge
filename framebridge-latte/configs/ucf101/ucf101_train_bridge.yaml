@@ -1,0 +1,61 @@
+# dataset
+dataset: "ucf101"
+
+data_path: /path/to/UCF101
+pretrained_model_path: /path/to/VAE/checkpoint
+
+# save and load
+results_dir: "./experiments"
+pretrained:
+
+# model config: 
+model: Latte-S/2
+num_frames: 16
+image_size: 256 # choices=[256, 512]
+num_sampling_steps: 250
+frame_interval: 3
+fixed_spatial: False
+attention_bias: True
+learn_sigma: False
+extras: 2 # [1, 2] 1 unconditional generation, 2 class-conditional generation
+model_stage: "bridge" # ["nwarp", "diffusion", "bridge"]
+model_predict_type: "eps_psi"
+condition_type: "concat_pre"
+prior_encoder_type: "first_pixel" # ["first_pixel", "mean_latent", "mean_pixel"]
+nwarp_supervision_type:
+nwarp_combine_lambda:
+
+use_pretrained_nwarp: False
+nwarp_config:
+nwarp_ckpt:
+nwarp_condition_type: # ["concat_only", "prior"]
+
+dct_domain: False
+use_quantile:
+dct_quantile:
+dct_coef_num:
+
+# train config:
+save_ceph: True # important
+learning_rate: 1e-5
+ckpt_every: 100
+clip_max_norm: 0.1
+start_clip_iter: 100000
+local_batch_size: 8 # important
+max_train_steps: 1000000
+global_seed: 42
+num_workers: 8
+log_every: 50
+lr_warmup_steps: 0
+resume_from_checkpoint:
+gradient_accumulation_steps: 1 # TODO
+num_classes: 101
+
+# low VRAM and speed up training
+use_compile: False
+mixed_precision: False
+enable_xformers_memory_efficient_attention: False
+gradient_checkpointing: False
+
+finetune_spatial_only: False
+finetune_snr_alignment: False

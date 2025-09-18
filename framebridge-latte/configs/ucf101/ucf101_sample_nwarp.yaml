@@ -1,0 +1,57 @@
+# path:
+ckpt:
+save_img_path: "./sample_videos/"
+pretrained_model_path:
+
+# model config: 
+model: Latte-nwarp-S/2
+model_stage: "nwarp" # ["nwarp", "diffusion", "bridge"]
+mse_only: True
+num_frames: 16
+image_size: 256 # choices=[256, 512]
+frame_interval: 3
+fixed_spatial: False
+attention_bias: True
+learn_sigma: False
+extras: 2 # [1, 2] 1 unconditional generation, 2 class-conditional generation
+model_predict_type: "eps_psi"
+num_classes: 101
+condition_type: "concat_pre"
+prior_encoder_type: first_pixel
+sample_prior: "ground_truth"
+nwarp_supervision_type: "regression"
+
+use_pretrained_nwarp: False
+nwarp_config: 
+nwarp_ckpt: 
+nwarp_condition_type:
+
+dct_domain: False
+use_quantile:
+dct_quantile:
+dct_coef_num:
+
+# model speedup
+use_compile: False
+use_fp16: False
+
+# sample config:
+seed: 100
+sample_method: 'bridge_sde'
+num_sampling_steps: 250
+cfg_scale: 1.0 # 1.0 represents conditional only
+run_time: 12
+num_sample: 1
+sample_names: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+negative_name: 101
+
+# ddp sample config
+per_proc_batch_size: 4
+num_fvd_samples: 2048
+
+# dataset for ground-truth prior
+dataset: "ucf101"
+data_path: "/path/to/UCF-101"
+
+finetune_spatial_only:
+finetune_snr_alignment:

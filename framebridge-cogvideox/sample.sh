@@ -1,0 +1,11 @@
+CUDA_VISIBLE_DEVICES=6 python cli_demo.py \
+ --prompt "prompt for I2V generation" \
+ --model_path "/path/to/CogVideoX-2B/or/the/downloaded/CogVideoX-2B-modified" \
+ --generate_type i2v \
+ --image_or_video_path /path/to/conditional/image \
+ --use_bridge \
+ --concat_type channel \
+ --width 256 \
+ --height 256 \
+ --non_zero_channel_padding \
+ --transformer_path "/path/to/the/transformer/folder/of/fine-tuned/FrameBridge-CogVideoX/model"

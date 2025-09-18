@@ -1,0 +1,18 @@
+# torch==2.1.0
+# torchvision
+timm
+diffusers[torch]==0.24.0
+accelerate
+tensorboard
+einops
+transformers
+av
+scikit-image
+decord
+pandas
+imageio-ffmpeg
+opencv-python
+omegaconf
+gpustat
+huggingface-hub==0.25.0
+numpy<2
