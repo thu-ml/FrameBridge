@@ -1,4 +1,4 @@
-CUDA_VISIBLE_DEVICES=6 python cli_demo.py \
+python cli_demo.py \
  --prompt "prompt for I2V generation" \
  --model_path "/path/to/CogVideoX-2B/or/the/downloaded/CogVideoX-2B-modified" \
  --generate_type i2v \

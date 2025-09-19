@@ -7,8 +7,7 @@ export DATASET_PATH="/path/to/WebVid-2M/metadata/file/results_2M_train.csv"
 export OUTPUT_PATH="experiments"
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
-export CUDA_VISIBLE_DEVICES=4,5,6,7
-accelerate_args="--num_processes 4"
+accelerate_args="--num_processes 8"
 
 accelerate launch --config_file accelerate_config_machine_single.yaml $accelerate_args --multi_gpu\
   train_cogvideox_image_to_video.py \

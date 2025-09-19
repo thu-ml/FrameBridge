@@ -77,7 +77,7 @@ pip install -r requirements.txt
 ### Training
 
 #### (1) Prepare UCF-101 Dataset and VAE Model
-Download UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101/UCF101.rar. 
+Download [UCF-101 dataset](https://www.crcv.ucf.edu/data/UCF101/UCF101.rar). 
 
 Download VAE model [stabilityai/sd-vae-ft-ema](https://huggingface.co/stabilityai/sd-vae-ft-ema) and put the files into the folder `checkpoints/vae`.
 
