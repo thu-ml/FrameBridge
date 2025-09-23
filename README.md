@@ -61,7 +61,58 @@ Run the script:
 bash sample.sh
 ```
 
-## 2. Training from Scratch on UCF-101
+## 2. Fine-tuning from VideoCrafter-1
+
+### Environment Setup
+
+```bash
+cd framebridge-videocrafter
+
+conda create -n framebridge-videocrafter python=3.10
+conda activate framebridge-videocrafter
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
+pip install -r requirements.txt
+```
+
+### Fine-tuning from VideoCrafter-1
+
+#### (1) Prepare the Initialization Model and Dataset
+
+Download [VideoCrafter-1 model ($256 \times 256$ resolution)](https://huggingface.co/VideoCrafter/Text2Video-256).
+
+Prepare WebVid-2M dataset in the same way as described in the previous section.
+
+#### (2) Run the Fine-tuning Script
+
+Modify the following path arguments in `configs/training_256_bridge/config.yaml`:
+
+- `pretrained_checkpoint` and `t2v_diffusion_checkpoint`: path to downloaded VideoCrafter-1 checkpoint
+- `data.params.train.params.data_dir`: path to `2M_train`
+- `data.params.train.params.meta_path`: path to `results_2M_train.csv`
+
+Run the script:
+
+```bash
+bash configs/training_256_bridge/run.sh
+```
+
+### Inference with Fine-tuned Model
+
+The fine-tuned FrameBridge-VideoCrafter model can be downloaded from the [Google Drive link](https://drive.google.com/file/d/1AiG-9DNfaNdLewwR3UL1eQGJHfydrhey/view?usp=sharing). (Unfortunately, due to limitations in computational resources and dataset quality, the performance of our model may not be satisfactory compared with some state-of-the-art models.)
+
+Before running inference, update the following arguments in `scripts/run_bridge.sh`:
+
+- `ckpt`: path to the fine-tuned FrameBridge model
+- `prompt_dir`: path to the image and text prompts (structured in the same way as in the sampling process of [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter))
+
+Run the script:
+
+```bash
+bash scripts/run_bridge.sh
+```
+
+
+## 3. Training from Scratch on UCF-101
 
 ### Environment Setup
 
@@ -77,7 +128,7 @@ pip install -r requirements.txt
 ### Training
 
 #### (1) Prepare UCF-101 Dataset and VAE Model
-Download [UCF-101 dataset](https://www.crcv.ucf.edu/data/UCF101/UCF101.rar). 
+Download UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101/UCF101.rar. 
 
 Download VAE model [stabilityai/sd-vae-ft-ema](https://huggingface.co/stabilityai/sd-vae-ft-ema) and put the files into the folder `checkpoints/vae`.
 
@@ -152,4 +203,4 @@ bash sample/ucf101_bridge_neural_prior.sh
 
 ## Acknowledgements
 
-This repository is built upon the excellent work of [CogVideoX](https://github.com/zai-org/CogVideo), [cogvideox-factory](https://github.com/huggingface/finetrainers), [Latte](https://github.com/Vchitect/Latte), and [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter). We sincerely thank the authors and contributors of these projects.
+This repository is built upon the excellent work of [Latte](https://github.com/Vchitect/Latte), [CogVideoX](https://github.com/zai-org/CogVideo), [cogvideox-factory](https://github.com/huggingface/finetrainers), [DynamiCrafter](https://github.com/Doubiiu/DynamiCrafter) and [VideoCrafter](https://github.com/AILab-CVC/VideoCrafter). We sincerely thank the authors and contributors of these projects for their open-source efforts and valuable resources.
