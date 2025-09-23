@@ -185,8 +185,9 @@ class FrozenOpenCLIPEmbedder(AbstractEncoder):
                  freeze=True, layer="last"):
         super().__init__()
         assert layer in self.LAYERS
-        model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'), 
-                                                            pretrained="../checkpoints/open_clip_pytorch_model.bin",)
+        # model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'), 
+        #                                                     pretrained="../checkpoints/open_clip_pytorch_model.bin",)
+        model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'), pretrained=version)
         del model.visual
         self.model = model
 
@@ -244,8 +245,10 @@ class FrozenOpenCLIPImageEmbedder(AbstractEncoder):
     def __init__(self, arch="ViT-H-14", version="laion2b_s32b_b79k", device="cuda", max_length=77,
                  freeze=True, layer="pooled", antialias=True, ucg_rate=0.):
         super().__init__()
+        # model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'),
+        #                                                     pretrained="../checkpoints/open_clip_pytorch_model.bin", )
         model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'),
-                                                            pretrained="../checkpoints/open_clip_pytorch_model.bin", )
+                                                            pretrained=version, )
         del model.transformer
         self.model = model
         # self.mapper = torch.nn.Linear(1280, 1024)
@@ -302,8 +305,10 @@ class FrozenOpenCLIPImageEmbedderV2(AbstractEncoder):
     def __init__(self, arch="ViT-H-14", version="laion2b_s32b_b79k", device="cuda",
                  freeze=True, layer="pooled", antialias=True):
         super().__init__()
+        # model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'),
+        #                                                     pretrained="../checkpoints/open_clip_pytorch_model.bin",)
         model, _, _ = open_clip.create_model_and_transforms(arch, device=torch.device('cpu'),
-                                                            pretrained="../checkpoints/open_clip_pytorch_model.bin",)
+                                                            pretrained=version, )
         del model.transformer
         self.model = model
         self.device = device
