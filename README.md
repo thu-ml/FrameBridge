@@ -78,7 +78,7 @@ pip install -r requirements.txt
 
 #### (1) Prepare the Initialization Model and Dataset
 
-Download [VideoCrafter-1 model ($256 \times 256$ resolution)](https://huggingface.co/VideoCrafter/Text2Video-256).
+Download [VideoCrafter-1 model (256 × 256 resolution)](https://huggingface.co/VideoCrafter/Text2Video-256).
 
 Prepare WebVid-2M dataset in the same way as described in the previous section.
 
