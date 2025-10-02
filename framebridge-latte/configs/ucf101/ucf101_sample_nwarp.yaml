@@ -36,7 +36,7 @@ use_compile: False
 use_fp16: False
 
 # sample config:
-seed: 100
+seed:
 sample_method: 'bridge_sde'
 num_sampling_steps: 250
 cfg_scale: 1.0 # 1.0 represents conditional only
